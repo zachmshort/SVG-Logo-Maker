@@ -10,7 +10,6 @@ let svg = "";
 svg = `<svg version="1.1" width="200" height="150" xmlns="http://www.w3.org/2000/svg">`;
 svg += `<g>`;
 svg += `${responses.shape}`;
-let shapeResponse;
 
     if (responses.shape === 'Square') {
         const square = new Square(response.characters, responses.shapeColor, responses.textColor)
