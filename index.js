@@ -50,28 +50,25 @@ function handleWriteFileError(error) {
     function init() { 
         inquirer.prompt(questions).then((responses) => {
             let svg = "";
-            svg = `<svg version="1.1" width="200" height="150" xmlns="http://www.w3.org/2000/svg">`;
+            svg = `<svg version="1.1" width="300" height="200" xmlns="http://www.w3.org/2000/svg">`;
             svg += `<g>`;
             let shapeResponse;
 
             if (responses.shape === 'Square') {
-                shapeResponse = new Square(responses.characters, responses.shapeColor, responses.textColor)
-                svg += shapeResponse.render();
+                shapeResponse = new Square(responses.characters)
             } else if (responses.shape === 'Circle') {
-                shapeResponse = new Circle(responses.characters, responses.shapeColor, responses.textColor)
-                svg += shapeResponse.render();
+                shapeResponse = new Circle(responses.characters)
             } else {
-                shapeResponse = new Triangle(responses.characters, responses.shapeColor, responses.textColor)
-                svg += shapeResponse.render();
+                shapeResponse = new Triangle(responses.characters)
             }
             
-            
+            shapeResponse.setColor(responses.shapeColor);
+            svg += shapeResponse.render();
+
             fs.writeFile(`./examples/${responses.characters}.svg`, svg, handleWriteFileError);
 
             if (responses.characters.length > 4) {
             console.log("Sorry, logo text has to be 3 letters or less.");
-            } else {
-            writeToFile(`${responses.characters}.json`, responses);
             }
             });
         }
