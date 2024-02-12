@@ -1,8 +1,8 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
-const { Square } = require('./lib/generateLogo.js');
-const { Triangle } = require('./lib/generateLogo.js');
-const { Circle } = require('./lib/generateLogo.js');
+const { Square } = require('./test/generateLogo.js');
+const { Triangle } = require('./test/generateLogo.js');
+const { Circle } = require('./test/generateLogo.js');
 
 function writeToFile(filename, data) {
     fs.writeFile(filename, JSON.stringify(data), (err) => {
