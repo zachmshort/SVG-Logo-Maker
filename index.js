@@ -50,19 +50,20 @@ function handleWriteFileError(error) {
     function init() { 
         inquirer.prompt(questions).then((responses) => {
             let svg = "";
-            svg = `<svg version="1.1" width="300" height="200" xmlns="http://www.w3.org/2000/svg">`;
-            svg += `<g>`;
             let shapeResponse;
 
             if (responses.shape === 'Square') {
-                shapeResponse = new Square(responses.characters)
+                shapeResponse = new Square()
             } else if (responses.shape === 'Circle') {
-                shapeResponse = new Circle(responses.characters)
+                shapeResponse = new Circle()
             } else {
-                shapeResponse = new Triangle(responses.characters)
+                shapeResponse = new Triangle()
             }
             
+            shapeResponse.characters = responses.characters;
             shapeResponse.setColor(responses.shapeColor);
+            shapeResponse.setTextColor(responses.textColor);
+
             svg += shapeResponse.render();
 
             fs.writeFile(`./examples/${responses.characters}.svg`, svg, handleWriteFileError);
