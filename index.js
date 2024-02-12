@@ -1,8 +1,8 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
-const { Square } = require('./test/generateLogo.js');
-const { Triangle } = require('./test/generateLogo.js');
-const { Circle } = require('./test/generateLogo.js');
+const { Square } = require('./lib/generateLogo.js');
+const { Triangle } = require('./lib/generateLogo.js');
+const { Circle } = require('./lib/generateLogo.js');
 
 function writeToFile(filename, data) {
     fs.writeFile(filename, JSON.stringify(data), (err) => {
@@ -49,6 +49,12 @@ function handleWriteFileError(error) {
 }
     function init() { 
         inquirer.prompt(questions).then((responses) => {
+
+            if (!responses.characters || !responses.textColor || !responses.shape || !responses.shapeColor) {
+                console.log("fill in all fields");
+                return;
+            }
+
             let svg = "";
             let shapeResponse;
 
